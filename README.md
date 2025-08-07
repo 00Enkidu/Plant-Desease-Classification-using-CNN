@@ -43,7 +43,7 @@ Epoch 5: accuracy: 0.9858, loss: 0.0441, val_accuracy: 0.8827, val_loss: 0.5362
 ```
 
 - The final model demonstrates strong generalization and can accurately classify unseen plant leaf images.
-- The model was trained and saved in `.h5` format using the notebook [Plant_Disease_Prediction_with_CNN.ipynb](Model%20Notebook/Plant_Disease_Prediction_with_CNN.ipynb).
+- The trained model is saved in `.h5` format at [`app/trained_model/train_fashion_mnist_model.h5`](app/trained_model/train_fashion_mnist_model.h5)
 ---
 
 ## Streamlit Web Application
