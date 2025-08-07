@@ -21,14 +21,60 @@ This project utilizes the PlantVillage dataset, which contains over 50,000 exper
 
 ## Image Processing
 
-- Images are pre-processed using resizing, normalization, and data augmentation (including rotation, flipping, and zooming) to improve model robustness.
-- Data is split into training, validation, and testing sets to ensure fair and effective evaluation.
+Image preprocessing is a crucial step for ensuring consistent input and improving model accuracy. This project’s image processing pipeline is implemented primarily in `app/main.py` and involves the following steps:
+
+```python
+def load_and_perprocess_image_image(image_path, target_size=(224, 224)):
+    # Load the image
+    img = Image.open(image_path)
+    img = img.resize(target_size)
+    img_array = np.array(img)
+    img_array = np.expand_dims(img_array, axis=0)
+    img_array = img_array.astype('float32') / 255.0
+    return img_array
+```
+
+**Key Steps:**
+- **Resizing:** All input images are resized to the specified `target_size` (default: 224x224 pixels) to ensure consistent input size.
+- **Normalization:** Pixel values are scaled to the [0, 1] range to stabilize and speed up model training.
+- **Dimension Expansion:** The image array is expanded to add a batch dimension, matching the model's expected input shape `[batch, height, width, channels]`.
+
+> **Note:**  
+> - The function operates on RGB color images without grayscale conversion.
+> - The `target_size` should match the input shape expected by the model.
+> - Data augmentation (e.g., rotation, flipping) is not included in this function but may be used during model training in the Jupyter Notebook.
 
 ---
 
-## Model Training and Results
+## Model Training and Architecture
 
-- A Convolutional Neural Network (CNN) is designed and trained for multi-class plant disease classification.
+Model training is implemented in the Jupyter Notebook (`Model Notebook/Plant_Disease_Prediction_with_CNN.ipynb`). The main model architecture is as follows:
+
+```python
+model = models.Sequential()
+model.add(layers.Conv2D(32, (3, 3), activation='relu', input_shape=(img_size, img_size, 3)))
+model.add(layers.MaxPooling2D((2, 2)))
+model.add(layers.Conv2D(64, (3, 3), activation='relu'))
+model.add(layers.MaxPooling2D((2, 2)))
+model.add(layers.Flatten())
+model.add(layers.Dense(256, activation='relu'))
+model.add(layers.Dense(train_generator.num_classes, activation='softmax'))
+```
+
+**Model Structure:**
+- **Input Layer:** Accepts color images of shape `(img_size, img_size, 3)`.
+- **Convolutional Layers:** Extract features from the input images.
+- **Pooling Layers:** Reduce the spatial dimensionality and computation.
+- **Flatten Layer:** Converts the 2D feature maps to a 1D vector.
+- **Dense Layers:** Fully connected layers for high-level reasoning.
+- **Output Layer:** Softmax activation for multi-class classification (number of classes equals `train_generator.num_classes`).
+
+**Training Details:**
+- **Loss Function:** `categorical_crossentropy`
+- **Optimizer:** `adam`
+- **Metrics:** `accuracy`
+
+**Results**
 - The model is trained for 5 epochs, achieving remarkable performance:
   - **Training Accuracy:** Improved from 60.2% to 98.6%
   - **Training Loss:** Decreased from 1.63 to 0.044
@@ -42,8 +88,8 @@ Epoch 4: accuracy: 0.9783, loss: 0.0668, val_accuracy: 0.8838, val_loss: 0.5069
 Epoch 5: accuracy: 0.9858, loss: 0.0441, val_accuracy: 0.8827, val_loss: 0.5362
 ```
 
-- The final model demonstrates strong generalization and can accurately classify unseen plant leaf images.
-- The trained model is saved in `.h5` format at [`app/trained_model/train_fashion_mnist_model.h5`](app/trained_model/train_fashion_mnist_model.h5)
+The final trained model is saved in `.h5` format and used for prediction in the Streamlit web app.
+
 ---
 
 ## Streamlit Web Application
