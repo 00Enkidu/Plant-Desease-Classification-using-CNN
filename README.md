@@ -140,5 +140,7 @@ The final trained model is saved in `.h5` format and used for prediction in the 
 
 This project is inspired by the need for scalable, accessible technology to support global food security and empower farmers through AI-driven disease detection.
 
+---
+
 > **All model code, logs, and result plots are based on the original notebook and project files.  
 > For any questions or suggestions, please open an issue.**
