@@ -81,14 +81,29 @@ model.add(layers.Dense(train_generator.num_classes, activation='softmax'))
   - **Validation Accuracy:** Remained above 87% throughout training
 
 ```
-Epoch 1: accuracy: 0.6015, loss: 1.6271, val_accuracy: 0.8744, val_loss: 0.4038
-Epoch 2: accuracy: 0.9221, loss: 0.2475, val_accuracy: 0.8715, val_loss: 0.3935
-Epoch 3: accuracy: 0.9657, loss: 0.1099, val_accuracy: 0.8926, val_loss: 0.3904
-Epoch 4: accuracy: 0.9783, loss: 0.0668, val_accuracy: 0.8838, val_loss: 0.5069
-Epoch 5: accuracy: 0.9858, loss: 0.0441, val_accuracy: 0.8827, val_loss: 0.5362
+Epoch 1/5
+1358/1358 ━━━━━━━━━━━━━━━━━━━━ 102s 70ms/step - accuracy: 0.6015 - loss: 1.6271 - val_accuracy: 0.8744 - val_loss: 0.4038
+Epoch 2/5
+1358/1358 ━━━━━━━━━━━━━━━━━━━━ 129s 65ms/step - accuracy: 0.9221 - loss: 0.2475 - val_accuracy: 0.8715 - val_loss: 0.3935
+Epoch 3/5
+1358/1358 ━━━━━━━━━━━━━━━━━━━━ 142s 65ms/step - accuracy: 0.9657 - loss: 0.1099 - val_accuracy: 0.8926 - val_loss: 0.3904
+Epoch 4/5
+1358/1358 ━━━━━━━━━━━━━━━━━━━━ 91s 67ms/step - accuracy: 0.9783 - loss: 0.0668 - val_accuracy: 0.8838 - val_loss: 0.5069
+Epoch 5/5
+1358/1358 ━━━━━━━━━━━━━━━━━━━━ 139s 65ms/step - accuracy: 0.9858 - loss: 0.0441 - val_accuracy: 0.8827 - val_loss: 0.5362
+
+Evaluating model
+339/339 ━━━━━━━━━━━━━━━━━━━━ 17s 50ms/step - accuracy: 0.8824 - loss: 0.5384
+Validation Accuracy: 88.27%
 ```
 
 The final trained model is saved in `.h5` format and used for prediction in the Streamlit web app.
+
+---
+## Result Visualization
+Below is the plot of training and validation accuracy and loss over epochs:
+<img width="576" height="455" alt="image" src="https://github.com/user-attachments/assets/630be693-ac32-4696-832a-c43da20cf5f8" />
+<img width="567" height="455" alt="image" src="https://github.com/user-attachments/assets/91f84002-5148-4196-878b-806a07d75c9f" />
 
 ---
 
