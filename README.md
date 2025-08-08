@@ -110,6 +110,8 @@ Below is the plot of training and validation accuracy and loss over epochs:
 ## Model Training Summary
 The training results (see accuracy and loss plots above) show that the model achieves high training accuracy and significant reduction in loss over epochs, indicating effective learning on the training set. The validation accuracy remains stable at a high level (around 88–89%), although there is a noticeable gap between training and validation accuracy. This suggests that while the model generalizes well, there may be some overfitting, and further improvements such as regularization or data augmentation could be considered. Overall, the model demonstrates strong potential for practical plant disease classification tasks.
 
+---
+
 ## Streamlit Web Application
 
 - The project includes an interactive [Streamlit](https://streamlit.io/) app (`main.py`) for user-friendly, real-time disease diagnosis.
